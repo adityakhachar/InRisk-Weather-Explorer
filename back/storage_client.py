@@ -1,16 +1,16 @@
  
 import boto3
 from botocore import UNSIGNED        
-from botocore.config import Config   
+from botocore.config import Config  # <-- MUST BE ADDED
 from typing import List, Dict
 from datetime import datetime
 from fastapi import HTTPException, status
 
- 
+# IMPORTANT: Replace this with your actual S3 bucket name!
 S3_BUCKET_NAME = "weather-explorer-data-aditya"
 
- 
- 
+# SET YOUR AWS REGION HERE (e.g., 'us-east-1', 'us-west-2', 'eu-central-1')
+# You must set this to the region where your S3 bucket resides.
 AWS_REGION = "us-east-1" 
 
 class S3Client:
@@ -21,7 +21,9 @@ class S3Client:
     def __init__(self, bucket_name: str = S3_BUCKET_NAME):
         self.bucket_name: str = bucket_name
         
-         
+        # FINAL FIX: Use Config(signature_version=UNSIGNED)
+        # This prevents the Authorization Header from being added entirely,
+        # resolving the 'AuthorizationHeaderMalformed' error.
         self.s3_client = boto3.client(
             's3',
             region_name=AWS_REGION, 
