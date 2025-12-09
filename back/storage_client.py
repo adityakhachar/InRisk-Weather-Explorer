@@ -1,6 +1,7 @@
 # back/storage_client.py (FINAL CREDENTIAL BYPASS FIX)
 import boto3
-from botocore.exceptions import ClientError
+from botocore import UNSIGNED       # <-- MUST BE ADDED
+from botocore.config import Config  # <-- MUST BE ADDED
 from typing import List, Dict
 from datetime import datetime
 from fastapi import HTTPException, status
