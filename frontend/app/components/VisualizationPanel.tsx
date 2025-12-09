@@ -4,7 +4,7 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { RawWeatherData } from '../page';
 
-const API_BASE_URL = 'http://127.0.0.1:8000'; 
+const API_BASE_URL = 'https://inrisk-weather-explorer.onrender.com/'; 
 
 // --- Types ---
 interface ChartData {

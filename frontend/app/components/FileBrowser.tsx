@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { FileMetadata } from '../page';
 
-const API_BASE_URL = 'http://127.0.0.1:8000'; 
+const API_BASE_URL = 'https://inrisk-weather-explorer.onrender.com/'; 
 
 interface FileBrowserProps {
     onFileSelect: (fileName: string) => void;

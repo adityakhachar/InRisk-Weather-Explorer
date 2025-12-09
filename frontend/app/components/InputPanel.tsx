@@ -3,7 +3,7 @@
 "use client";
 import React, { useState, FormEvent } from 'react';
 
-const API_BASE_URL = 'http://127.0.0.1:8000'; 
+const API_BASE_URL = 'https://inrisk-weather-explorer.onrender.com/'; 
 
 interface InputPanelProps {
     onFileStored: () => void;
