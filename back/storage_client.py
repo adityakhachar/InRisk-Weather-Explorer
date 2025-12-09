@@ -20,16 +20,14 @@ class S3Client:
     def __init__(self, bucket_name: str = S3_BUCKET_NAME):
         self.bucket_name: str = bucket_name
         
-        # FINAL BYPASS: Pass empty credentials to satisfy the client initialization
-        # requirements and explicitly set the region. This is required even for
-        # public buckets to stop boto3 from crashing due to missing ENV variables.
+        # FINAL FIX: Use Config(signature_version=UNSIGNED)
+        # This prevents the Authorization Header from being added entirely,
+        # resolving the 'AuthorizationHeaderMalformed' error.
         self.s3_client = boto3.client(
             's3',
             region_name=AWS_REGION, 
-            aws_access_key_id='',       
-            aws_secret_access_key=''    
+            config=Config(signature_version=UNSIGNED)
         )
-
     def upload_file(self, data: bytes, filename: str) -> str:
         """
         Stores the raw JSON data as an object in the S3 bucket.
