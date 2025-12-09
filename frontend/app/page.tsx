@@ -1,5 +1,3 @@
-// frontend/app/page.tsx (FINAL COMPLETE CODE)
-
 "use client";
 import { useState, useCallback } from 'react';
 import InputPanel from './components/InputPanel';
