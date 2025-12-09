@@ -1,8 +1,6 @@
-# back/storage_client.py (FINAL REVISION)
+# back/storage_client.py (FINAL CREDENTIAL BYPASS FIX)
 import boto3
 from botocore.exceptions import ClientError
-from botocore.config import Config # 1. NEW IMPORT for client configuration
-from botocore import UNSIGNED # 2. NEW IMPORT for anonymous access
 from typing import List, Dict
 from datetime import datetime
 from fastapi import HTTPException, status
@@ -10,30 +8,31 @@ from fastapi import HTTPException, status
 # IMPORTANT: Replace this with your actual S3 bucket name!
 S3_BUCKET_NAME = "weather-explorer-data-aditya"
 
-# 3. SET YOUR AWS REGION HERE (e.g., 'us-east-1', 'us-west-2', 'eu-central-1')
+# SET YOUR AWS REGION HERE (e.g., 'us-east-1', 'us-west-2', 'eu-central-1')
 # You must set this to the region where your S3 bucket resides.
 AWS_REGION = "us-east-1" 
 
 class S3Client:
     """
     Handles all interactions with AWS S3.
-    Uses anonymous access configuration for public/read-only S3 bucket access.
+    Uses empty credentials to bypass the credential search chain for public bucket access.
     """
     def __init__(self, bucket_name: str = S3_BUCKET_NAME):
         self.bucket_name: str = bucket_name
         
-        # FIX APPLIED: Force UNSIGNED signature and set the region explicitly.
-        # This bypasses the need for AWS_ACCESS_KEY_ID/SECRET, but requires public policies.
+        # FINAL BYPASS: Pass empty credentials to satisfy the client initialization
+        # requirements and explicitly set the region. This is required even for
+        # public buckets to stop boto3 from crashing due to missing ENV variables.
         self.s3_client = boto3.client(
             's3',
             region_name=AWS_REGION, 
-            config=Config(signature_version=UNSIGNED)
+            aws_access_key_id='',       
+            aws_secret_access_key=''    
         )
 
     def upload_file(self, data: bytes, filename: str) -> str:
         """
         Stores the raw JSON data as an object in the S3 bucket.
-        Requires the S3 bucket to allow public write/put access.
         """
         try:
             self.s3_client.put_object(
@@ -49,7 +48,6 @@ class S3Client:
     def list_files(self) -> List[Dict]:
         """
         Lists all objects in the S3 bucket.
-        Requires the S3 bucket policy to allow 's3:ListBucket'.
         """
         files_metadata = []
         try:
@@ -72,10 +70,9 @@ class S3Client:
     def download_file(self, filename: str) -> bytes:
         """
         Fetches the JSON content of a specific file from the bucket.
-        Requires the S3 bucket policy to allow 's3:GetObject'.
         """
         try:
-            response = self.s3_client.s3_client.get_object(Bucket=self.bucket_name, Key=filename)
+            response = self.s3_client.get_object(Bucket=self.bucket_name, Key=filename)
             return response['Body'].read()
         except ClientError as e:
             if e.response['Error']['Code'] == 'NoSuchKey':
