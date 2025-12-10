@@ -55,7 +55,7 @@ export default function Home() {
             <h1 className="text-3xl font-extrabold text-blue-700 tracking-tight sm:text-4xl lg:text-5xl">
               InRisk Weather Explorer Dashboard
             </h1>
-            <p className="text-sm text-gray-500 mt-1 lg:text-lg">Full-Stack Assessment Solution</p>
+            {/* <p className="text-sm text-gray-500 mt-1 lg:text-lg">Full-Stack Assessment Solution</p> */}
           </header>
 
           {/* Main Layout Grid: Defaults to 1 column on mobile (grid-cols-1), switches to 4 columns on large screens (lg:grid-cols-4) */}

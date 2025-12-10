@@ -1,4 +1,4 @@
-// frontend/app/components/InputPanel.tsx (FINAL FIX FOR TEXT COLOR)
+// frontend/app/components/InputPanel.tsx (FINAL FIX FOR 404 ERROR)
 
 "use client";
 import React, { useState, FormEvent } from 'react';
@@ -42,7 +42,8 @@ function InputPanel({ onFileStored }: InputPanelProps) {
         setSuccessFile(null);
 
         try {
-            const response = await fetch(`${API_BASE_URL}/fetch-and-store-weather`, {
+            // CRITICAL FIX: Changed endpoint to match backend's defined route: /store-weather-data
+            const response = await fetch(`${API_BASE_URL}/store-weather-data`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,7 +58,7 @@ function InputPanel({ onFileStored }: InputPanelProps) {
                 setError(`Error (${response.status}): ${errorDetail}`);
             } else {
                 setSuccessFile(data.file);
-                onFileStored();
+                onFileStored(); // Signal parent to refresh FileBrowser
             }
         } catch (err: any) {
             setError(`Network error: ${err.message}`);
@@ -79,7 +80,7 @@ function InputPanel({ onFileStored }: InputPanelProps) {
                         onChange={handleChange}
                         placeholder={key.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
                         
-                        // FIX APPLIED: Strongest dark color and appearance override
+                        // Responsive Fixes: Guaranteed dark text for mobile readability
                         className="p-2 border border-gray-300 rounded 
                                    text-gray-900 
                                    bg-white

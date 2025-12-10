@@ -2,7 +2,7 @@
 "[project]/app/components/InputPanel.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-// frontend/app/components/InputPanel.tsx (FINAL FIX FOR TEXT COLOR)
+// frontend/app/components/InputPanel.tsx (FINAL FIX FOR 404 ERROR)
 __turbopack_context__.s([
     "default",
     ()=>__TURBOPACK__default__export__
@@ -38,7 +38,8 @@ function InputPanel({ onFileStored }) {
         setError(null);
         setSuccessFile(null);
         try {
-            const response = await fetch(`${API_BASE_URL}/fetch-and-store-weather`, {
+            // CRITICAL FIX: Changed endpoint to match backend's defined route: /store-weather-data
+            const response = await fetch(`${API_BASE_URL}/store-weather-data`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -51,7 +52,7 @@ function InputPanel({ onFileStored }) {
                 setError(`Error (${response.status}): ${errorDetail}`);
             } else {
                 setSuccessFile(data.file);
-                onFileStored();
+                onFileStored(); // Signal parent to refresh FileBrowser
             }
         } catch (err) {
             setError(`Network error: ${err.message}`);
@@ -67,7 +68,7 @@ function InputPanel({ onFileStored }) {
                 children: "Fetch & Store Data"
             }, void 0, false, {
                 fileName: "[project]/app/components/InputPanel.tsx",
-                lineNumber: 71,
+                lineNumber: 72,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -80,13 +81,13 @@ function InputPanel({ onFileStored }) {
                             value: formData[key],
                             onChange: handleChange,
                             placeholder: key.split('_').map((w)=>w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
-                            // FIX APPLIED: Strongest dark color and appearance override
+                            // Responsive Fixes: Guaranteed dark text for mobile readability
                             className: "p-2 border border-gray-300 rounded    text-gray-900    bg-white   placeholder-gray-500    focus:ring-blue-500    appearance-none",
                             required: true,
                             step: key.includes('date') ? undefined : 'any'
                         }, key, false, {
                             fileName: "[project]/app/components/InputPanel.tsx",
-                            lineNumber: 74,
+                            lineNumber: 75,
                             columnNumber: 21
                         }, this)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -96,13 +97,13 @@ function InputPanel({ onFileStored }) {
                         children: loading ? 'Fetching & Storing...' : 'Fetch & Store Data'
                     }, void 0, false, {
                         fileName: "[project]/app/components/InputPanel.tsx",
-                        lineNumber: 95,
+                        lineNumber: 96,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/components/InputPanel.tsx",
-                lineNumber: 72,
+                lineNumber: 73,
                 columnNumber: 13
             }, this),
             error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -113,7 +114,7 @@ function InputPanel({ onFileStored }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/components/InputPanel.tsx",
-                lineNumber: 107,
+                lineNumber: 108,
                 columnNumber: 17
             }, this),
             successFile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -125,13 +126,13 @@ function InputPanel({ onFileStored }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/components/InputPanel.tsx",
-                lineNumber: 112,
+                lineNumber: 113,
                 columnNumber: 17
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/components/InputPanel.tsx",
-        lineNumber: 70,
+        lineNumber: 71,
         columnNumber: 9
     }, this);
 }
@@ -303,14 +304,13 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "[project]/app/components/VisualizationPanel.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-// frontend/app/components/VisualizationPanel.tsx (FINAL RESPONSIVE CODE)
+// frontend/app/components/VisualizationPanel.tsx (REVISED RENDER LOGIC)
 __turbopack_context__.s([
     "default",
     ()=>__TURBOPACK__default__export__
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
-// Import ResponsiveContainer for charts to resize automatically
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$chart$2f$LineChart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/recharts/es6/chart/LineChart.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$Line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/recharts/es6/cartesian/Line.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$XAxis$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/recharts/es6/cartesian/XAxis.js [app-client] (ecmascript)");
@@ -318,14 +318,13 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$CartesianGrid$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/recharts/es6/cartesian/CartesianGrid.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Tooltip$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/recharts/es6/component/Tooltip.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Legend$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/recharts/es6/component/Legend.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$component$2f$ResponsiveContainer$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/recharts/es6/component/ResponsiveContainer.js [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
 ;
 ;
 const API_BASE_URL = 'https://inrisk-weather-explorer.onrender.com';
-// Helper function to safely parse a value
+// Helper function to safely parse a value, converting null/undefined/NaN to 0
 const safeParse = (value)=>{
     return value === null || value === undefined || isNaN(value) ? 0 : value;
 };
@@ -357,14 +356,16 @@ function VisualizationPanel({ selectedFile, weatherData, setWeatherData }) {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(`${API_BASE_URL}/get-weather-data/${selectedFile}`); // Corrected endpoint based on README
+            const response = await fetch(`${API_BASE_URL}/weather-file-content/${selectedFile}`);
             let rawData = await response.json();
-            // CRITICAL BLOCK FOR DOUBLE PARSING SAFETY (Kept as is)
+            // CRITICAL BLOCK FOR DOUBLE PARSING SAFETY
             try {
+                // If the first parse results in a string (due to double encoding), parse it again
                 if (typeof rawData === 'string') {
                     rawData = JSON.parse(rawData);
                 }
             } catch (e) {
+                // If JSON.parse fails here, catch it and throw a controlled error
                 throw new Error("Data corruption error: Content could not be parsed into valid JSON.");
             }
             // END CRITICAL BLOCK
@@ -378,9 +379,11 @@ function VisualizationPanel({ selectedFile, weatherData, setWeatherData }) {
                 setProcessedData(newProcessedData);
             }
         } catch (err) {
+            // This catches network errors AND the new Data corruption error
             setError(`Processing Error: ${err.message}`);
             setProcessedData([]);
         } finally{
+            // GUARANTEE THIS LINE EXECUTES
             setLoading(false);
         }
     };
@@ -399,130 +402,117 @@ function VisualizationPanel({ selectedFile, weatherData, setWeatherData }) {
     const endIndex = startIndex + rowsPerPage;
     const currentRows = processedData.slice(startIndex, endIndex);
     // --- Render Functions (Chart fix applied) ---
-    const renderChart = ()=>// FIX 1: Use ResponsiveContainer to make the chart auto-size to its parent div.
+    const renderChart = ()=>// Fixed width/height for stable rendering (no ResponsiveContainer)
         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             style: {
-                width: '100%',
-                height: '300px'
+                width: '780px',
+                height: '300px',
+                margin: '0 auto'
             },
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$component$2f$ResponsiveContainer$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ResponsiveContainer"], {
-                width: "100%",
-                height: "100%",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$chart$2f$LineChart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LineChart"], {
-                    data: processedData,
-                    margin: {
-                        top: 5,
-                        right: 20,
-                        left: 10,
-                        bottom: 5
-                    },
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$CartesianGrid$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CartesianGrid"], {
-                            strokeDasharray: "3 3",
-                            stroke: "#e0e0e0"
-                        }, void 0, false, {
-                            fileName: "[project]/app/components/VisualizationPanel.tsx",
-                            lineNumber: 116,
-                            columnNumber: 15
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$XAxis$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["XAxis"], {
-                            dataKey: "date",
-                            interval: "preserveStartEnd",
-                            tick: {
-                                fontSize: 10
-                            }
-                        }, void 0, false, {
-                            fileName: "[project]/app/components/VisualizationPanel.tsx",
-                            lineNumber: 117,
-                            columnNumber: 15
-                        }, this),
-                        " ",
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$YAxis$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["YAxis"], {
-                            label: {
-                                value: `Temperature (°C)`,
-                                angle: -90,
-                                position: 'insideLeft',
-                                fontSize: 10
-                            }
-                        }, void 0, false, {
-                            fileName: "[project]/app/components/VisualizationPanel.tsx",
-                            lineNumber: 118,
-                            columnNumber: 15
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Tooltip$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Tooltip"], {}, void 0, false, {
-                            fileName: "[project]/app/components/VisualizationPanel.tsx",
-                            lineNumber: 119,
-                            columnNumber: 15
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Legend$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Legend"], {
-                            wrapperStyle: {
-                                fontSize: '12px'
-                            }
-                        }, void 0, false, {
-                            fileName: "[project]/app/components/VisualizationPanel.tsx",
-                            lineNumber: 120,
-                            columnNumber: 15
-                        }, this),
-                        " ",
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$Line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Line"], {
-                            type: "monotone",
-                            dataKey: "tempMax",
-                            name: "Max Temp (2m)",
-                            stroke: "#e64a19",
-                            strokeWidth: 2
-                        }, void 0, false, {
-                            fileName: "[project]/app/components/VisualizationPanel.tsx",
-                            lineNumber: 121,
-                            columnNumber: 15
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$Line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Line"], {
-                            type: "monotone",
-                            dataKey: "tempMin",
-                            name: "Min Temp (2m)",
-                            stroke: "#1976d2",
-                            strokeWidth: 2
-                        }, void 0, false, {
-                            fileName: "[project]/app/components/VisualizationPanel.tsx",
-                            lineNumber: 128,
-                            columnNumber: 15
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/app/components/VisualizationPanel.tsx",
-                    lineNumber: 112,
-                    columnNumber: 13
-                }, this)
-            }, void 0, false, {
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$chart$2f$LineChart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LineChart"], {
+                width: 780,
+                height: 300,
+                data: processedData,
+                margin: {
+                    top: 5,
+                    right: 20,
+                    left: 10,
+                    bottom: 5
+                },
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$CartesianGrid$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CartesianGrid"], {
+                        strokeDasharray: "3 3",
+                        stroke: "#e0e0e0"
+                    }, void 0, false, {
+                        fileName: "[project]/app/components/VisualizationPanel.tsx",
+                        lineNumber: 120,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$XAxis$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["XAxis"], {
+                        dataKey: "date",
+                        interval: "preserveStartEnd",
+                        tick: {
+                            fontSize: 12
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/app/components/VisualizationPanel.tsx",
+                        lineNumber: 121,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$YAxis$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["YAxis"], {
+                        label: {
+                            value: `Temperature (°C)`,
+                            angle: -90,
+                            position: 'insideLeft'
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/app/components/VisualizationPanel.tsx",
+                        lineNumber: 122,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Tooltip$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Tooltip"], {}, void 0, false, {
+                        fileName: "[project]/app/components/VisualizationPanel.tsx",
+                        lineNumber: 123,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Legend$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Legend"], {}, void 0, false, {
+                        fileName: "[project]/app/components/VisualizationPanel.tsx",
+                        lineNumber: 124,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$Line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Line"], {
+                        type: "monotone",
+                        dataKey: "tempMax",
+                        name: "Max Temp (2m)",
+                        stroke: "#e64a19",
+                        strokeWidth: 2
+                    }, void 0, false, {
+                        fileName: "[project]/app/components/VisualizationPanel.tsx",
+                        lineNumber: 125,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$Line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Line"], {
+                        type: "monotone",
+                        dataKey: "tempMin",
+                        name: "Min Temp (2m)",
+                        stroke: "#1976d2",
+                        strokeWidth: 2
+                    }, void 0, false, {
+                        fileName: "[project]/app/components/VisualizationPanel.tsx",
+                        lineNumber: 132,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                lineNumber: 111,
-                columnNumber: 11
+                lineNumber: 114,
+                columnNumber: 7
             }, this)
         }, void 0, false, {
             fileName: "[project]/app/components/VisualizationPanel.tsx",
-            lineNumber: 110,
-            columnNumber: 9
+            lineNumber: 113,
+            columnNumber: 5
         }, this);
-    const renderTable = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+    const renderTable = ()=>// ... (Table code remains the same) ...
+        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "mt-8",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                    className: "text-lg lg:text-xl font-bold text-gray-800 mb-4",
+                    className: "text-xl font-semibold mb-4",
                     children: "Raw Data Table"
                 }, void 0, false, {
                     fileName: "[project]/app/components/VisualizationPanel.tsx",
-                    lineNumber: 142,
-                    columnNumber: 13
+                    lineNumber: 146,
+                    columnNumber: 7
                 }, this),
-                " ",
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex justify-between items-center mb-4 text-xs sm:text-sm",
+                    className: "flex justify-between items-center mb-4 text-sm",
                     children: [
-                        " ",
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             children: [
                                 "Rows per page:",
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                    className: "ml-2 border rounded p-1 text-gray-700",
+                                    className: "ml-2 border rounded p-1",
                                     value: rowsPerPage,
                                     onChange: (e)=>{
                                         setRowsPerPage(Number(e.target.value));
@@ -537,67 +527,57 @@ function VisualizationPanel({ selectedFile, weatherData, setWeatherData }) {
                                             children: val
                                         }, val, false, {
                                             fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                            lineNumber: 157,
-                                            columnNumber: 29
+                                            lineNumber: 161,
+                                            columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                    lineNumber: 148,
-                                    columnNumber: 21
+                                    lineNumber: 152,
+                                    columnNumber: 11
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/components/VisualizationPanel.tsx",
-                            lineNumber: 146,
-                            columnNumber: 17
+                            lineNumber: 150,
+                            columnNumber: 9
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex items-center",
                             children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    className: "mr-2",
-                                    children: [
-                                        "Page ",
-                                        currentPage,
-                                        " of ",
-                                        totalPages
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                    lineNumber: 162,
-                                    columnNumber: 21
-                                }, this),
+                                "Page ",
+                                currentPage,
+                                " of ",
+                                totalPages,
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     onClick: ()=>setCurrentPage((prev)=>Math.max(prev - 1, 1)),
                                     disabled: currentPage === 1,
-                                    className: "p-1 border rounded text-xs sm:text-sm text-gray-700 disabled:opacity-50 hover:bg-gray-100",
+                                    className: "ml-3 p-1 border rounded text-gray-700 disabled:opacity-50",
                                     children: "Previous"
                                 }, void 0, false, {
                                     fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                    lineNumber: 163,
-                                    columnNumber: 21
+                                    lineNumber: 167,
+                                    columnNumber: 11
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     onClick: ()=>setCurrentPage((prev)=>Math.min(prev + 1, totalPages)),
                                     disabled: currentPage === totalPages,
-                                    className: "ml-2 p-1 border rounded text-xs sm:text-sm text-gray-700 disabled:opacity-50 hover:bg-gray-100",
+                                    className: "ml-2 p-1 border rounded text-gray-700 disabled:opacity-50",
                                     children: "Next"
                                 }, void 0, false, {
                                     fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                    lineNumber: 170,
-                                    columnNumber: 21
+                                    lineNumber: 174,
+                                    columnNumber: 11
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/components/VisualizationPanel.tsx",
-                            lineNumber: 161,
-                            columnNumber: 17
+                            lineNumber: 165,
+                            columnNumber: 9
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/components/VisualizationPanel.tsx",
-                    lineNumber: 145,
-                    columnNumber: 13
+                    lineNumber: 149,
+                    columnNumber: 7
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "overflow-x-auto border rounded-lg",
@@ -613,24 +593,23 @@ function VisualizationPanel({ selectedFile, weatherData, setWeatherData }) {
                                         'Min Temp (°C)',
                                         'Apparent Max (°C)',
                                         'Apparent Min (°C)'
-                                    ].map((header)=>// FIX 3: Reduced padding and font size on table headers
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                            className: "px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap",
+                                    ].map((header)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                            className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
                                             children: header
                                         }, header, false, {
                                             fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                            lineNumber: 188,
-                                            columnNumber: 33
+                                            lineNumber: 190,
+                                            columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                    lineNumber: 185,
-                                    columnNumber: 25
+                                    lineNumber: 188,
+                                    columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                lineNumber: 184,
-                                columnNumber: 21
+                                lineNumber: 187,
+                                columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
                                 className: "bg-white divide-y divide-gray-200",
@@ -638,116 +617,114 @@ function VisualizationPanel({ selectedFile, weatherData, setWeatherData }) {
                                         className: "hover:bg-gray-50",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                className: "px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-sm font-medium text-gray-900",
+                                                className: "px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900",
                                                 children: row.date
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                                lineNumber: 198,
-                                                columnNumber: 33
+                                                lineNumber: 199,
+                                                columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                className: "px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-sm text-gray-500",
+                                                className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500",
                                                 children: row.tempMax
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                                lineNumber: 199,
-                                                columnNumber: 33
+                                                lineNumber: 200,
+                                                columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                className: "px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-sm text-gray-500",
+                                                className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500",
                                                 children: row.tempMin
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                                lineNumber: 200,
-                                                columnNumber: 33
+                                                lineNumber: 201,
+                                                columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                className: "px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-sm text-gray-500",
+                                                className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500",
                                                 children: row.apparentMax
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                                lineNumber: 201,
-                                                columnNumber: 33
+                                                lineNumber: 202,
+                                                columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                className: "px-3 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-sm text-gray-500",
+                                                className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500",
                                                 children: row.apparentMin
                                             }, void 0, false, {
                                                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                                lineNumber: 202,
-                                                columnNumber: 33
+                                                lineNumber: 203,
+                                                columnNumber: 17
                                             }, this)
                                         ]
                                     }, row.date, true, {
                                         fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                        lineNumber: 196,
-                                        columnNumber: 29
+                                        lineNumber: 198,
+                                        columnNumber: 15
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                lineNumber: 194,
-                                columnNumber: 21
+                                lineNumber: 196,
+                                columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/components/VisualizationPanel.tsx",
-                        lineNumber: 183,
-                        columnNumber: 17
+                        lineNumber: 186,
+                        columnNumber: 9
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/components/VisualizationPanel.tsx",
-                    lineNumber: 182,
-                    columnNumber: 13
+                    lineNumber: 185,
+                    columnNumber: 7
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/components/VisualizationPanel.tsx",
-            lineNumber: 141,
-            columnNumber: 9
+            lineNumber: 145,
+            columnNumber: 5
         }, this);
     // --- MAIN RENDERING LOGIC ---
-    // 1. If no file is selected, show the prompt
+    // 1. If no file is selected, show the prompt (This part is unchanged)
     if (!selectedFile) {
-        // FIX 5: Reduced padding and min-height on mobile
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "p-6 lg:p-8 bg-white rounded-lg shadow-xl h-full flex items-center justify-center min-h-[300px] lg:min-h-[500px]",
+            className: "p-8 bg-white rounded-lg shadow-xl h-full flex items-center justify-center min-h-[500px]",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                className: "text-gray-500 text-base lg:text-lg text-center",
+                className: "text-gray-500 text-lg",
                 children: "Select a file from the left panel to view and visualize the weather data."
             }, void 0, false, {
                 fileName: "[project]/app/components/VisualizationPanel.tsx",
                 lineNumber: 219,
-                columnNumber: 17
+                columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/app/components/VisualizationPanel.tsx",
             lineNumber: 218,
-            columnNumber: 13
+            columnNumber: 7
         }, this);
     }
     // 2. If a file IS selected, we render the container and conditionally show content
-    return(// FIX 6: Reduced padding on mobile
-    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "p-4 sm:p-6 lg:p-8 bg-white rounded-lg shadow-xl h-full",
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "p-8 bg-white rounded-lg shadow-xl h-full",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                className: "text-xl lg:text-2xl font-bold mb-6 truncate",
+                className: "text-2xl font-bold mb-6 truncate",
                 children: [
                     "Visualization: ",
                     selectedFile
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                lineNumber: 230,
-                columnNumber: 13
+                lineNumber: 229,
+                columnNumber: 7
             }, this),
             loading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "p-4 text-center text-blue-600",
                 children: "Loading data... (Fetching from S3 via FastAPI)"
             }, void 0, false, {
                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                lineNumber: 237,
-                columnNumber: 17
+                lineNumber: 236,
+                columnNumber: 9
             }, this),
             error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "p-4 bg-red-100 text-red-700 rounded border border-red-300",
@@ -757,28 +734,28 @@ function VisualizationPanel({ selectedFile, weatherData, setWeatherData }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                lineNumber: 243,
-                columnNumber: 17
+                lineNumber: 242,
+                columnNumber: 9
             }, this),
             !loading && processedData.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "mb-8",
+                        className: "mb-8 overflow-x-auto",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                 className: "text-xl font-semibold mb-4",
                                 children: "Daily Temperature Chart"
                             }, void 0, false, {
                                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                                lineNumber: 254,
-                                columnNumber: 25
+                                lineNumber: 261,
+                                columnNumber: 13
                             }, this),
                             renderChart()
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/components/VisualizationPanel.tsx",
-                        lineNumber: 253,
-                        columnNumber: 21
+                        lineNumber: 260,
+                        columnNumber: 11
                     }, this),
                     renderTable()
                 ]
@@ -788,15 +765,15 @@ function VisualizationPanel({ selectedFile, weatherData, setWeatherData }) {
                 children: "No weather data available for this file."
             }, void 0, false, {
                 fileName: "[project]/app/components/VisualizationPanel.tsx",
-                lineNumber: 264,
-                columnNumber: 17
+                lineNumber: 271,
+                columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/components/VisualizationPanel.tsx",
-        lineNumber: 229,
-        columnNumber: 9
-    }, this));
+        lineNumber: 228,
+        columnNumber: 5
+    }, this);
 }
 _s(VisualizationPanel, "t8+TNiOwpO5zDRHz0qokPx1B+bo=");
 _c = VisualizationPanel;
@@ -850,25 +827,15 @@ function Home() {
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
                     className: "text-center py-4 mb-6 lg:py-6 lg:mb-12 border-b border-blue-200",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                            className: "text-3xl font-extrabold text-blue-700 tracking-tight sm:text-4xl lg:text-5xl",
-                            children: "InRisk Weather Explorer Dashboard"
-                        }, void 0, false, {
-                            fileName: "[project]/app/page.tsx",
-                            lineNumber: 55,
-                            columnNumber: 13
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: "text-sm text-gray-500 mt-1 lg:text-lg",
-                            children: "Full-Stack Assessment Solution"
-                        }, void 0, false, {
-                            fileName: "[project]/app/page.tsx",
-                            lineNumber: 58,
-                            columnNumber: 13
-                        }, this)
-                    ]
-                }, void 0, true, {
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                        className: "text-3xl font-extrabold text-blue-700 tracking-tight sm:text-4xl lg:text-5xl",
+                        children: "InRisk Weather Explorer Dashboard"
+                    }, void 0, false, {
+                        fileName: "[project]/app/page.tsx",
+                        lineNumber: 55,
+                        columnNumber: 13
+                    }, this)
+                }, void 0, false, {
                     fileName: "[project]/app/page.tsx",
                     lineNumber: 54,
                     columnNumber: 11
