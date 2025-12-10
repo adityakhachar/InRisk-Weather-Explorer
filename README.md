@@ -17,15 +17,6 @@ The application adheres to a modern **Monorepo** structure, cleanly separating t
 
 ---
 
-## 📸 Application Screenshots
-
-### Desktop View
-
-
-### Mobile Responsive View
-
-
----
 
 ## 🛠️ Technology Stack
 
@@ -39,8 +30,4 @@ The application adheres to a modern **Monorepo** structure, cleanly separating t
 | **Data Storage** | **AWS S3** / **boto3** | Secure, scalable cloud object storage for raw JSON weather data. |
 | **Deployment** | **Vercel** & **Render** | Dedicated, seamless hosting for the frontend and backend services. |
 
----
 
-## 📁 Monorepo Structure
-
-The project is structured with two main directories within a single Git repository:
